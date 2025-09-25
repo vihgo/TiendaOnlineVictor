@@ -3,8 +3,9 @@ package com.example.tiendaonlinevictor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
+
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,10 +34,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //TiendaOnlineVictorTheme
-            TarjetaConMensaje(
-                Mensaje("Viktor","Bienvenido a la primera clase de Jetpack Compose")
-            )
+            TiendaOnlineVictorTheme{
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    TarjetaConMensaje(
+                        Mensaje("Viktor","Bienvenido a la primera clase de Jetpack Compose")
+                    )
+                }
+            }
+
+
 
         }
     }
@@ -48,12 +56,13 @@ fun TarjetaConMensaje(mensaje: Mensaje){
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
+                .border(2.dp, MaterialTheme.colorScheme.primary,CircleShape)
         )
         Spacer(modifier = Modifier.width(10.dp))
         Column {
-            Text(mensaje.autor)
+            Text(mensaje.autor,color=MaterialTheme.colorScheme.secondary )
             Spacer(modifier = Modifier.height(7.dp))
-            Text(mensaje.cuerpo)
+            Text(mensaje.cuerpo, color = MaterialTheme.colorScheme.tertiary)
         }
     }
 
@@ -62,5 +71,11 @@ fun TarjetaConMensaje(mensaje: Mensaje){
 @Preview
 @Composable
 fun VistaPreviaTarjetaConMensaje(){
-    TarjetaConMensaje( Mensaje("Viktor","Bienvenido a la primera clase de Jetpack Compose"))
+    TiendaOnlineVictorTheme{
+        Surface(modifier = Modifier.fillMaxSize()) {
+            TarjetaConMensaje(
+                Mensaje("Viktor","Bienvenido a la primera clase de Jetpack Compose")
+            )
+        }
+    }
 }
